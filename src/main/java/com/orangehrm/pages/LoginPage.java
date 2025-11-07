@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.orangehrm.utils.Log;
+
 public class LoginPage extends BasePage {
 
     /* Login Page Locators */
@@ -27,19 +29,23 @@ public class LoginPage extends BasePage {
 
     // Page actions using BasePage methods
     public void enterUsername(String username) {
+    	Log.step("Entering username");
         safeType(login_username, username);
     }
 
     public void enterPassword(String password) {
+    	Log.step("Entering password");
         safeType(login_password, password);
     }
 
     public void clickLogin() {
+    	Log.step("Clicking Login");
         safeClick(login_button);
     }
 
     public DashboardPage loginValidUser(WebDriver driver, String user, String pass) {
-        enterUsername(user);
+    	Log.step("Login flow: valid user");
+    	enterUsername(user);
         enterPassword(pass);
         clickLogin();
         waitForUrlContains("/dashboard");
@@ -47,7 +53,8 @@ public class LoginPage extends BasePage {
     }
 
     public String loginInvalidUser(String user, String pass) {
-        enterUsername(user);
+    	Log.step("Login flow: invalid user");
+    	enterUsername(user);
         enterPassword(pass);
         clickLogin();
         waitForVisibility(login_invalid_credentials_label);

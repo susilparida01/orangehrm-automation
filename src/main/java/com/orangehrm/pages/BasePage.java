@@ -1,6 +1,8 @@
 package com.orangehrm.pages;
 
 import com.orangehrm.utils.Constants;
+import com.orangehrm.utils.Log;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
@@ -30,18 +32,22 @@ public class BasePage {
     public void click(WebElement element) {
         waitForVisibility(element);
         waitForElementToBeClickable(element);
+        Log.step("Click: " + debugName(element));
         element.click();
     }
 
     public void typeText(WebElement element, String text) {
         waitForVisibility(element);
+        Log.step("Type: '" + text + "' into " + debugName(element));
         element.clear();
         element.sendKeys(text);
     }
 
     public String getText(WebElement element) {
         waitForVisibility(element);
-        return element.getText().trim();
+        String t = element.getText().trim();
+        Log.step("Get text from " + debugName(element) + " -> '" + t + "'");
+        return t;
     }
 
     public boolean isDisplayed(WebElement element) {
@@ -89,4 +95,17 @@ public class BasePage {
             element.sendKeys(value);
         }
     }
+    
+    private String debugName(WebElement el) {
+        try {
+            String tag = el.getTagName();
+            String id = el.getAttribute("id");
+            String name = el.getAttribute("name");
+            if (id != null && !id.isBlank()) return "<" + tag + "#"+ id + ">";
+            if (name != null && !name.isBlank()) return "<" + tag + "[name="+ name +"]>";
+            return "<" + tag + ">";
+       } catch (Exception e) {
+            return "<element>";
+       }
+   }
 }

@@ -22,7 +22,7 @@ public class Login_AdminUser extends BaseTest {
         LoginPage login = new LoginPage(driver);
         String errorMessage = login.loginInvalidUser("Admin", "wrongPassword!");
 
-        Assert.assertEquals(errorMessage, "Invalid credentials",
+        Assert.assertEquals(errorMessage, "Invalid wwwwcredentials",
                 "Expected 'Invalid credentials' message, but got: " + errorMessage);
     }
 }
