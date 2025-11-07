@@ -18,6 +18,8 @@
     <testng.version>7.11.0</testng.version>
     <wdm.version>6.3.2</wdm.version>
     <surefire.version>3.2.5</surefire.version>
+    <er.version>5.1.1</er.version>
+    <ci.version>2.20.0</ci.version>
   </properties>
 
   <dependencies>
@@ -41,6 +43,21 @@
       <version>${testng.version}</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+	<dependency>
+	    <groupId>com.aventstack</groupId>
+	    <artifactId>extentreports</artifactId>
+	    <version>${er.version}</version>
+	</dependency>
+	
+	<!-- For FileUtils.copyFile to save screenshots -->
+	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+	<dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>${ci.version}</version>
+	</dependency>
     
   </dependencies>
   
